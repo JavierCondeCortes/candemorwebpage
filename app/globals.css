@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@keyframes rotate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-rotate {
+  background-size: 200% 200%;
+  animation: rotate-gradient 8s ease infinite;
+}
+
+
+:root {
+  --background: #ffffff;
+  --contentground: #171717;
+  --pinkCandemor:#ff00ff;
+  --limeCandemor:#deff00;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(0 2 13);
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Bowlby One", Helvetica, sans-serif;
+}
+
+@font-face {
+    font-family: "Dog Rough";
+    src: url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.eot");
+    src: url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.eot?#iefix") format("embedded-opentype"),
+        url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.woff2") format("woff2"),
+        url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.dogRough {
+    font-family: "Dog Rough", sans-serif;
+}
