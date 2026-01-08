@@ -93,7 +93,7 @@ export function CandeNavbar() {
                         .find((item) => item.label === hoverItem)
                         ?.sections.map((section) => (
                             <div key={section.title} className="flex flex-col items-center text-center basis-0 grow hover:scale-110 transition-all duration-500">
-                                {section.url ? (
+                                {'url' in section && section.url ? (
                                     <a href={section.url} target="_blank" rel="noopener noreferrer" className="block ">
                                         <h3 className="font-semibold">{section.title}</h3>
                                         <p className="text-gray-600">{section.description}</p>
