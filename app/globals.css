@@ -4,9 +4,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -17,12 +19,59 @@
   animation: rotate-gradient 8s ease infinite;
 }
 
+/* Importar fuente personalizada */
+@font-face {
+  font-family: 'CandeFont';
+  src: url('/fonts/candefont.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
-  --background: #ffffff;
-  --contentground: #171717;
-  --pinkCandemor:#ff00ff;
-  --limeCandemor:#deff00;
+  /* Navbar */
+  --navbar_bg: rgba(0, 0, 0, 0.7);
+  --navbar_text: #FFFFFF;
+  --navbar_hover: rgba(255, 255, 255, 0.1);
+
+  /* Hero */
+  --hero_title: #FFFFFF;
+  --hero_button_bg: #FFFFFF;
+  --hero_button_text: #5865F2;
+  --hero_button_hover: #F0F0F0;
+  --hero_arrow: #FFFFFF;
+
+  /* Footer */
+  --footer_bg: rgba(0, 0, 0, 0.8);
+  --footer_text: #FFFFFF;
+  --footer_link_hover: #9D4EDD;
+
+  /* Dividers */
+  --divider_color1: #9D4EDD;
+  --divider_color2: #000000;
+  --divider_color3: #FFD60A;
+
+  /* Sponsors */
+  --sponsors_item_bg: #f0f0f0;
+  --sponsors_item_border: #ddd;
+  --sponsors_item_hover: #e0e0e0;
+
+  /* Content */
+  --content_bg: #FFFFFF;
+  --content_title: #333;
+  --content_text: #555;
+  --content_link: #9D4EDD;
+
+  /* Fonts */
+  --title_family: 'Poppins', sans-serif;
+  --body_family: 'Inter', sans-serif;
+  --cande_font: 'CandeFont', sans-serif;
+
+  /* Primary */
+  --primary-black: #1a1a2e;
+  --primary-dark: #0a0e27;
+  --secondary-purple: #9D4EDD;
+  --accent-yellow: #FFD60A;
 }
 
 @theme inline {
@@ -46,15 +95,44 @@ body {
 }
 
 @font-face {
-    font-family: "Dog Rough";
-    src: url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.eot");
-    src: url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.eot?#iefix") format("embedded-opentype"),
-        url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.woff2") format("woff2"),
-        url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Dog Rough";
+  src: url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.eot");
+  src: url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.eot?#iefix") format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.woff2") format("woff2"),
+    url("https://db.onlinewebfonts.com/t/2a4bb65982d34c06076261a267437449.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .dogRough {
-    font-family: "Dog Rough", sans-serif;
+  font-family: "Dog Rough", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: var(--body_family);
+  background-color: var(--content_bg);
+  color: var(--content_text);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--title_family);
+  color: var(--content_title);
 }

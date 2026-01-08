@@ -1,0 +1,67 @@
+{
+  "navigation": [
+    {
+      "id": 1,
+      "label": "Inicio",
+      "url": "#hero",
+      "subitems": []
+    },
+    {
+      "id": 2,
+      "label": "Comunidad",
+      "url": "#",
+      "subitems": [
+        { "label": "Discord", "url": "https://discord.gg/..." },
+        { "label": "Twitch", "url": "https://twitch.tv/..." }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Merch",
+      "url": "#merch",
+      "subitems": []
+    }
+  ],
+  "colors": {
+    "navbar_bg": "rgba(0, 0, 0, 0.7)",
+    "navbar_text": "#FFFFFF",
+    "content_bg": "#FFFFFF",
+    "footer_bg": "rgba(0, 0, 0, 0.5)",
+    "accent": "#9D4EDD"
+  },
+  "hero": {
+    "video_url": "path/to/video.mp4",
+    "title": "Canderor",
+    "discord_url": "https://discord.gg/...",
+    "show_discord_btn": true
+  },
+  "sponsors": [
+    {
+      "id": 1,
+      "name": "Sponsor 1",
+      "logo": "path/to/logo1.png",
+      "url": "https://..."
+    }
+  ],
+  "content_blocks": [
+    {
+      "id": 1,
+      "type": "text_image",
+      "layout": "image_left",
+      "title": "Bloque 1",
+      "text": "Contenido...",
+      "image": "path/to/image.png"
+    }
+  ],
+  "footer": {
+    "links": [
+      { "label": "Contacto", "url": "#" },
+      { "label": "Términos", "url": "#" }
+    ],
+    "copyright": "© 2024 Canderor. Todos los derechos reservados."
+  },
+  "twitch": {
+    "channel": "canderor",
+    "show_offline": true
+  }
+}

@@ -1,18 +1,43 @@
-'use server'
+'use client';
 
-export async function Footer() {
-    return (
-        <footer className="relative w-full h-34.5 px overflow-hidden cursor-default flex items-end justify-end
-                bg-gradient-to-l from-[var(--limeCandemor)] via-black to-[var(--pinkCandemor)]   
-                bg-rotate">
-            <div className="flex flex-col items-center justify-center bg-[var(--background)] w-full h-[90%] text-white py-4 opacity-90">
-                <div>
-                    <a href="https://twitter.com/candemor" target="_blank" className="mx-2 basis-0 hover:underline">Twitter</a>
-                    <a href="https://discord.gg/HHusseuHwx" target="_blank" className="mx-2 basis-0 hover:underline">Discord</a>
-                    <a href="https://www.instagram.com/candemor/" target="_blank" className="mx-2 basis-0 hover:underline">Instagram</a>
-                </div>
-                <p className="text-sm">&copy; {new Date().getFullYear()} Candemor. Todos los derechos reservados.</p>
-            </div>
-        </footer>
-    );
+import styles from './footer.module.css';
+import { Colors } from '@/app/lib/configManager';
+
+interface FooterProps {
+  footer: {
+    links: Array<{ label: string; url: string }>;
+    copyright: string;
+  };
+  colors: Colors;
+}
+
+export function Footer({ footer, colors }: FooterProps) {
+  return (
+    <footer 
+      className={styles.footer}
+      style={{
+        backgroundColor: colors.footer_bg,
+        color: colors.navbar_text,
+      }}
+    >
+      <div className={styles.footerContainer}>
+        <div className={styles.footerContent}>
+          {footer.links.map((link, idx) => (
+            <a 
+              key={idx}
+              href={link.url} 
+              className={styles.footerLink}
+              target={link.url.startsWith('http') ? '_blank' : '_self'}
+              rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <div className={styles.footerCopyright}>
+          {footer.copyright}
+        </div>
+      </div>
+    </footer>
+  );
 }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Canderor</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Login Panel -->
+    <div id="loginPanel" class="login-panel">
+        <div class="login-container">
+            <h1>Panel Administrador</h1>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Usuario" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button type="submit">Acceder</button>
+            </form>
+            <div id="loginError" class="error"></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <nav class="admin-navbar">
+            <h2>Administrador</h2>
+            <button id="logoutBtn">Cerrar sesión</button>
+        </nav>
+
+        <div class="admin-container">
+            <!-- Pestañas -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="colors">Colores</button>
+                <button class="tab-btn" data-tab="navigation">Navegación</button>
+                <button class="tab-btn" data-tab="hero">Hero</button>
+                <button class="tab-btn" data-tab="sponsors">Patrocinadores</button>
+                <button class="tab-btn" data-tab="content">Contenido</button>
+                <button class="tab-btn" data-tab="footer">Footer</button>
+            </div>
+
+            <!-- Contenido de pestañas -->
+            <div class="tab-content active" id="colors">
+                <h3>Configuración de Colores</h3>
+                <div class="form-group">
+                    <label>Color Navbar Background:</label>
+                    <input type="color" id="navbarBg" name="navbar_bg">
+                </div>
+                <div class="form-group">
+                    <label>Color Navbar Text:</label>
+                    <input type="color" id="navbarText" name="navbar_text">
+                </div>
+                <div class="form-group">
+                    <label>Color Content Background:</label>
+                    <input type="color" id="contentBg" name="content_bg">
+                </div>
+                <div class="form-group">
+                    <label>Color Footer Background:</label>
+                    <input type="color" id="footerBg" name="footer_bg">
+                </div>
+                <div class="form-group">
+                    <label>Color Accent:</label>
+                    <input type="color" id="accent" name="accent">
+                </div>
+                <button class="save-btn" onclick="adminManager.saveColors()">Guardar Colores</button>
+            </div>
+
+            <div class="tab-content" id="navigation">
+                <h3>Gestionar Navegación</h3>
+                <button onclick="adminManager.addNavigationItem()">+ Agregar Apartado</button>
+                <div id="navigationList" class="items-list"></div>
+            </div>
+
+            <div class="tab-content" id="hero">
+                <h3>Configurar Hero</h3>
+                <div class="form-group">
+                    <label>Título del Hero:</label>
+                    <input type="text" id="heroTitle" name="title">
+                </div>
+                <div class="form-group">
+                    <label>URL del Video:</label>
+                    <input type="text" id="heroVideo" name="video_url">
+                </div>
+                <div class="form-group">
+                    <label>URL Discord:</label>
+                    <input type="text" id="heroDiscord" name="discord_url">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="showDiscordBtn" name="show_discord_btn">
+                        Mostrar botón Discord
+                    </label>
+                </div>
+                <button class="save-btn" onclick="adminManager.saveHero()">Guardar Hero</button>
+            </div>
+
+            <div class="tab-content" id="sponsors">
+                <h3>Gestionar Patrocinadores</h3>
+                <button onclick="adminManager.addSponsor()">+ Agregar Patrocinador</button>
+                <div id="sponsorsList" class="items-list"></div>
+            </div>
+
+            <div class="tab-content" id="content">
+                <h3>Gestionar Contenido</h3>
+                <button onclick="adminManager.addContentBlock()">+ Agregar Bloque</button>
+                <div id="contentList" class="items-list"></div>
+            </div>
+
+            <div class="tab-content" id="footer">
+                <h3>Configurar Footer</h3>
+                <button onclick="adminManager.addFooterLink()">+ Agregar Enlace</button>
+                <div id="footerLinksList" class="items-list"></div>
+                <div class="form-group">
+                    <label>Copyright:</label>
+                    <textarea id="copyright" name="copyright"></textarea>
+                </div>
+                <button class="save-btn" onclick="adminManager.saveFooter()">Guardar Footer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

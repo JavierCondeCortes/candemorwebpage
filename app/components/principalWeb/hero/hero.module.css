@@ -1,0 +1,234 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.heroVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeIn 1s ease-in;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 900;
+  text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+  margin: 0;
+  color: var(--hero_title);
+}
+
+.discordBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hero_button_bg);
+  color: var(--hero_button_text);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  gap: 0.75rem;
+  cursor: pointer;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.discordBtn:hover {
+  background: var(--hero_button_hover);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.discordIcon {
+  width: 28px;
+  height: 28px;
+  transform: skewY(-10deg);
+}
+
+.arrowDown {
+  color: var(--hero_arrow);
+  font-size: 2.5rem;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.arrowDown svg {
+  width: 40px;
+  height: 40px;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Twitch Widget */
+.twitchWidget {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 280px;
+  height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 15;
+  background: #000;
+  border: 2px solid var(--secondary-purple);
+}
+
+.twitchContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.streamContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.streamBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ff0000;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.loadingStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+.spinner {
+  font-size: 1.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.offlineStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-weight: bold;
+  gap: 0.3rem;
+}
+
+.offlineDot {
+  font-size: 1.2rem;
+  animation: pulse 1.5s infinite;
+  line-height: 1;
+  color: #ff4444;
+}
+
+.offlineText {
+  font-size: 0.9rem;
+}
+
+.offlineSubtext {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    margin-top: 60px;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .twitchWidget {
+    width: 200px;
+    height: 120px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .offlineStatus {
+    font-size: 0.8rem;
+  }
+
+  .discordBtn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}

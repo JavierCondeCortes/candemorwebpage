@@ -1,23 +1,60 @@
-import styles from "./sponsor.module.css"
+'use client';
 
-//crear un array asociativo o mapa para guardar el nombre e imagen, para, que a medida que sume o reste
-// no pierda la cantidad de elementos y el espacio de la web
+import { useEffect, useState } from 'react';
+import styles from './sponsor.module.css';
+import { Sponsor } from '@/app/lib/configManager';
 
-export function SponsorBar(){
+interface SponsorBarProps {
+  sponsors: Sponsor[];
+  colors?: any;
+}
 
-    const sponsor = [
-        {id:0,name:"FatCat",src:"/img/sponsors/FatCat.png", url: "https://www.fatcatrace.xyz/home"},
-        {id:1,name:"SpcarcoGiti",src:"img/sponsors/SparcoGiti.png", url:"https://giti-tire.eu/"},
-        {id:2,name:"Zdrinks",src:"img/sponsors/Zdrinks.png", url:"https://www.zetadrinks.com/"},
-    ]
+export function SponsorBar({ sponsors, colors }: SponsorBarProps) {
+  const [shouldScroll, setShouldScroll] = useState(false);
+  const [displaySponsors, setDisplaySponsors] = useState<Sponsor[]>([]);
 
-    return(
-        <ul className="flex justify-around h-[8vh] items-center my-7 mx-2">
-            {sponsor.map(marca =>(
-                <li key={marca.id}>
-                    <a href={marca.url} target="_blank"><img src={marca.src} alt={marca.name} className="h-[3vw] flex basis-0 grow hover:scale-110 transition-all duration-300 ease-in-out "/></a>
-                </li>
-            ))}
-        </ul>
-    )
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const threshold = isMobile ? 4 : 6;
+
+    // Si hay suficientes patrocinadores, duplicar para crear el efecto infinito
+    if (sponsors.length >= threshold) {
+      setShouldScroll(true);
+      // Duplicar 2 veces para asegurar que siempre haya contenido visible
+      setDisplaySponsors([...sponsors, ...sponsors, ...sponsors]);
+    } else {
+      setShouldScroll(false);
+      setDisplaySponsors(sponsors);
+    }
+  }, [sponsors]);
+
+  return (
+    <div className={styles.sponsorsSection}>
+      <h2 className={styles.sponsorsTitle}>Nuestros Patrocinadores</h2>
+      <div
+        className={`${styles.sponsorsContainer} ${shouldScroll ? styles.autoScroll : ''}`}
+        style={{
+          '--sponsor-bg': colors?.sponsors?.item_bg || '#f0f0f0',
+          '--sponsor-border': colors?.sponsors?.item_border || '#ddd',
+        } as any}
+      >
+        {displaySponsors.map((sponsor, idx) => (
+          <div key={`sponsor-${sponsor.id}-${idx}`} className={styles.sponsorItem}>
+            <a
+              href={sponsor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={sponsor.name}
+            >
+              <img
+                src={sponsor.logo}
+                alt={sponsor.name}
+                loading="lazy"
+              />
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

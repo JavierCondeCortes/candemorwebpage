@@ -1,114 +1,187 @@
-"use client";
-import { url } from "inspector";
-import { useState } from "react";
+'use client';
 
-// Ahora cada item tiene label y sections
-const menuItems = [
-    {
-        label: "Twitch",
-        sections: [
-            { title: "Canal Oficial", description: "Transmisiones en vivo", url: "https://www.twitch.tv/candemorracingteam" },
-        ],
-    },
-    {
-        label: "Comunidad",
-        sections: [
-            { title: "Discord", description: "Únete a la comunidad", url: "https://discord.gg/HHusseuHwx" },
-            { title: "Pinturas", description: "Personaliza tu coche", url: "https://www.tradingpaints.com/profile/640319/Alejandro-Guerrero" },
-            { title: "Merch", description: "Compra productos oficiales", url: "https://candemor-racing-communiteam-shop.fourthwall.com/en-eur" },
-        ],
-    },
-    {
-        label: "Giti & Sparco",
-        sections: [
-            { title: "¿Quiénes son?", description: "Conoce a nuestros sponsors" },
-            { title: "Ligas", description: "Competiciones anuales" },
-            { title: "Experiencias", description: "Historias de pilotos" },
-        ],
-    },
-    {
-        label: "Candeonato",
-        sections: [
-            { title: "¿Qué es?", description: "Descubre el campeonato" },
-            { title: "Eventos", description: "Fechas y circuitos" },
-            { title: "Media", description: "Fotos y vídeos" },
-        ],
-    },
-];
+import { useState } from 'react';
+import styles from './navbar.module.css';
+import { NavItem, Colors } from '@/app/lib/configManager';
 
+interface CandeNavbarProps {
+  navigation: NavItem[];
+  colors: Colors;
+}
 
-export function CandeNavbar() {
-    const [hoverItem, setHoverItem] = useState<string | null>(null);
+export function CandeNavbar({ navigation, colors }: CandeNavbarProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+  const [hoverDropdown, setHoverDropdown] = useState<number | null>(null);
 
-    // Dividir en dos mitades
-    const half = Math.ceil(menuItems.length / 2);
-    const leftItems = menuItems.slice(0, half);
-    const rightItems = menuItems.slice(half);
+  const toggleHamburger = () => {
+    setIsOpen(!isOpen);
+    setOpenDropdown(null);
+  };
 
-    return (
-        <nav className="absolute bg-[#0a0a0aaf] text-white w-full z-50">
-            <ul className="flex justify-center gap-10 items-center h-16 text-sm font-medium">
-                {/* Lado izquierdo */}
-                {leftItems.map((item) => (
-                    <li
-                        key={item.label}
-                        onMouseEnter={() => setHoverItem(item.label)}
-                        onMouseLeave={() => setHoverItem(null)}
-                        className="cursor-pointer h-full flex items-center basis-5vw basis-0 text-center hover:scale-110 transition-all duration-300"
-                    >
-                        {item.label}
-                    </li>
+  const toggleDropdown = (id: number) => {
+    setOpenDropdown(openDropdown === id ? null : id);
+  };
+
+  const handleNavItemClick = () => {
+    setIsOpen(false);
+    setOpenDropdown(null);
+  };
+
+  // Dividir navegación: logo en centro, resto distribuido
+  const navItems = navigation;
+
+  return (
+    <>
+      <nav 
+        className={styles.navbar}
+        style={{
+          backgroundColor: colors.navbar_bg,
+          color: colors.navbar_text,
+        }}
+      >
+        <div className={styles.navbarContainer}>
+          {/* Menu Izquierda */}
+          <ul className={styles.navMenuLeft}>
+            {navItems.slice(0, Math.ceil(navItems.length / 2)).map((item) => (
+              <li 
+                key={item.id} 
+                className={styles.navItem}
+                onMouseEnter={() => item.subitems.length > 0 && setHoverDropdown(item.id)}
+                onMouseLeave={() => setHoverDropdown(null)}
+              >
+                <a href={item.url}>{item.label}</a>
+                {item.subitems.length > 0 && (
+                  <button
+                    className={styles.dropdownToggle}
+                    onClick={() => toggleDropdown(item.id)}
+                  >
+                    ▼
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Logo - Centro */}
+          <div className={styles.navbarLogo}>
+            <p style={{ fontFamily: 'var(--cande_font)', fontSize: '2rem' }} >Candemor</p>
+          </div>
+
+          {/* Menu Derecha */}
+          <ul className={styles.navMenuRight}>
+            {navItems.slice(Math.ceil(navItems.length / 2)).map((item) => (
+              <li 
+                key={item.id} 
+                className={styles.navItem}
+                onMouseEnter={() => item.subitems.length > 0 && setHoverDropdown(item.id)}
+                onMouseLeave={() => setHoverDropdown(null)}
+              >
+                <a href={item.url}>{item.label}</a>
+                {item.subitems.length > 0 && (
+                  <button
+                    className={styles.dropdownToggle}
+                    onClick={() => toggleDropdown(item.id)}
+                  >
+                    ▼
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Hamburger - Mobile */}
+          <button 
+            className={`${styles.hamburger} ${isOpen ? styles.active : ''}`}
+            onClick={toggleHamburger}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+
+      {/* Dropdowns desktop - Ancho completo */}
+      {navigation.map((item) => (
+        item.subitems.length > 0 && (
+          <div
+            key={`dropdown-${item.id}`}
+            className={`${styles.desktopDropdown} ${hoverDropdown === item.id ? styles.show : ''}`}
+            style={{
+              backgroundColor: colors.navbar_text,
+              color: '#000',
+            }}
+            onMouseEnter={() => setHoverDropdown(item.id)}
+            onMouseLeave={() => setHoverDropdown(null)}
+          >
+            <div className={styles.dropdownContent}>
+              <div className={styles.dropdownTitle}>{item.label}</div>
+              <div className={styles.dropdownSubitems}>
+                {item.subitems.map((subitem, idx) => (
+                  <a 
+                    key={idx}
+                    href={subitem.url}
+                    className={styles.dropdownSubitem}
+                    onClick={handleNavItemClick}
+                  >
+                    {subitem.label}
+                  </a>
                 ))}
-
-                {/* CANDEMOR siempre en el centro */}
-                <li className="font-bold text-2xl tracking-[2px] cursor-pointer hover:scale-110 transition-all duration-300">
-                    <a href="">
-                        <p className="dogRough">CANDEMOR</p>
-                    </a>
-                </li>
-
-                {/* Lado derecho */}
-                {rightItems.map((item) => (
-                    <li
-                        key={item.label}
-                        onMouseEnter={() => setHoverItem(item.label)}
-                        onMouseLeave={() => setHoverItem(null)}
-                        className="cursor-pointer h-full flex items-center basis-5vw basis-0 text-center hover:scale-110 transition-all duration-300"
-                    >
-                        {item.label}
-                    </li>
-                ))}
-            </ul>
-
-            {/* Dropdown mega menú */}
-            <div
-                className={`absolute top-full w-full bg-white text-black border border-gray-200
-                    transition-all duration-500 ease-in-out
-                    ${hoverItem ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5 pointer-events-none"}`}
-                onMouseEnter={() => hoverItem && setHoverItem(hoverItem)}
-                onMouseLeave={() => setHoverItem(null)}
-            >
-                <div className="flex justify-around h-40 items-center">
-                    {menuItems
-                        .find((item) => item.label === hoverItem)
-                        ?.sections.map((section) => (
-                            <div key={section.title} className="flex flex-col items-center text-center basis-0 grow hover:scale-110 transition-all duration-500">
-                                {'url' in section && section.url ? (
-                                    <a href={section.url} target="_blank" rel="noopener noreferrer" className="block ">
-                                        <h3 className="font-semibold">{section.title}</h3>
-                                        <p className="text-gray-600">{section.description}</p>
-                                    </a>
-                                ) : (
-                                    <div>
-                                        <h3 className="font-semibold">{section.title}</h3>
-                                        <p className="text-gray-600">{section.description}</p>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-
-                </div>
+              </div>
             </div>
-        </nav>
-    );
+          </div>
+        )
+      ))}
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div 
+          className={styles.navDropdown}
+          style={{
+            backgroundColor: colors.navbar_bg,
+            color: colors.navbar_text,
+          }}
+        >
+          {navigation.map((item) => (
+            <div key={item.id} className={styles.dropdownItem}>
+              <div 
+                className={styles.dropdownTitle}
+                onClick={() => {
+                  if (item.subitems.length > 0) {
+                    toggleDropdown(item.id);
+                  } else {
+                    handleNavItemClick();
+                  }
+                }}
+              >
+                {item.label}
+                {item.subitems.length > 0 && (
+                  <span className={`${styles.chevron} ${openDropdown === item.id ? styles.open : ''}`}>
+                    ▼
+                  </span>
+                )}
+              </div>
+
+              {item.subitems.length > 0 && openDropdown === item.id && (
+                <div className={styles.dropdownSubitems}>
+                  {item.subitems.map((subitem, idx) => (
+                    <a 
+                      key={idx}
+                      href={subitem.url}
+                      className={styles.dropdownSubitem}
+                      onClick={handleNavItemClick}
+                    >
+                      {subitem.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  );
 }

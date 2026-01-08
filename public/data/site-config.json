@@ -1,0 +1,158 @@
+{
+  "navigation": [
+    {
+      "id": 1,
+      "label": "Inicio",
+      "url": "#hero",
+      "subitems": []
+    },
+    {
+      "id": 2,
+      "label": "Comunidad",
+      "url": "#",
+      "subitems": [
+        {
+          "label": "Discord",
+          "url": "https://discord.gg/candemor"
+        },
+        {
+          "label": "Twitch",
+          "url": "https://twitch.tv/candemor"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Merch",
+      "url": "#merch",
+      "subitems": []
+    },
+    {
+      "id": 4,
+      "label": "Contacto",
+      "url": "#contacto",
+      "subitems": []
+    }
+  ],
+  "colors": {
+    "navbar": {
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "hover": "rgba(0, 0, 0, 0.8)"
+    },
+    "hero": {
+      "title": "#FFFFFF",
+      "button_bg": "#FFFFFF",
+      "button_text": "#5865F2",
+      "button_hover": "#F0F0F0",
+      "arrow": "#FFFFFF"
+    },
+    "footer": {
+      "background": "#FFFFFF",
+      "text": "#1a1a1a",
+      "link_hover": "#000000"
+    },
+    "dividers": {
+      "color1": "#9D4EDD",
+      "color2": "#000000",
+      "color3": "#FFD60A"
+    },
+    "sponsors": {
+      "item_bg": "#f0f0f0",
+      "item_border": "#ddd",
+      "item_hover": "#e0e0e0"
+    },
+    "content": {
+      "background": "#FFFFFF",
+      "title": "#333",
+      "text": "#555",
+      "link": "#9D4EDD"
+    }
+  },
+  "colorHistory": [
+    "rgba(0, 0, 0, 0.8)",
+    "#000000",
+    "#1a1a1a",
+    "#FFFFFF",
+    "#FFD60A",
+    "#9D4EDD"
+  ],
+  "colorFavorites": [
+    "#FFFFFF",
+    "rgba(0, 0, 0, 0.8)",
+    "#000000",
+    "#9D4EDD",
+    "#FFD60A"
+  ],
+  "fonts": {
+    "title_font": "https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap",
+    "body_font": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap",
+    "title_family": "'Poppins', sans-serif",
+    "body_family": "'Inter', sans-serif"
+  },
+  "hero": {
+    "video_url": "/uploads/video/Hero.mp4",
+    "title": "Candemor",
+    "title_size": "10rem",
+    "discord_url": "https://discord.gg/candemor",
+    "show_discord_btn": true
+  },
+  "sponsors": [
+    {
+      "id": 1,
+      "name": "Sponsor 1",
+      "logo": "/sponsors/sponsor1.png",
+      "url": "https://example.com"
+    },
+    {
+      "id": 1767905075588,
+      "name": "Nuevo Patrocinador",
+      "logo": "/path/to/logo.png",
+      "url": "https://example.com"
+    },
+    {
+      "id": 1767905076164,
+      "name": "Nuevo Patrocinador",
+      "logo": "/path/to/logo.png",
+      "url": "https://example.com"
+    },
+    {
+      "id": 1767905084792,
+      "name": "Nuevo Patrocinador",
+      "logo": "/path/to/logo.png",
+      "url": "https://example.com"
+    }
+  ],
+  "content_blocks": [
+    {
+      "id": 1,
+      "type": "text_image",
+      "layout": "image_right",
+      "title": "Sobre Nosotros",
+      "text": "Candemor es una comunidad dedicada a crear contenido de calidad en Twitch. Nos apasiona el gaming y compartir experiencias con nuestra comunidad.",
+      "image": "/uploads/img/cafe.png",
+      "image_shadow": false
+    }
+  ],
+  "footer": {
+    "links": [
+      {
+        "label": "Discord",
+        "url": "https://discord.gg/candemor"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://twitch.tv/candemor"
+      },
+      {
+        "label": "Contacto",
+        "url": "mailto:info@candemor.com"
+      }
+    ],
+    "copyright": "© 2024 Candemor. Todos los derechos reservados."
+  },
+  "twitch": {
+    "channel": "candemorracingteam",
+    "show_offline": true
+  }
+}
