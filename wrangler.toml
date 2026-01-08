@@ -1,0 +1,6 @@
+name = "candemorwebpage"
+main = ".vercel/output/static/_worker.js"
+compatibility_date = "2026-01-08"
+
+[assets]
+directory = ".vercel/output/static"
