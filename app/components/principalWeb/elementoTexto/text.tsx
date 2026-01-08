@@ -5,7 +5,7 @@ type TextoProps = {
     orientacion: 'izq' | 'der';
 };
 
-export default function Texto({ titulo, texto, imagen, orientacion }: TextoProps) {
+export function Texto({ titulo, texto, imagen, orientacion }: TextoProps) {
     let contenido;
 
     switch (orientacion) {
