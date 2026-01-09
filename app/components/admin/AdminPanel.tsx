@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { SiteConfig } from '@/app/lib/configManager';
 import './admin.css';
 import { LoginPanel } from './LoginPanel';
 import { AdminDashboard } from './AdminDashboard';
 
 export function AdminPanel() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [config, setConfig] = useState(null);
+  const [config, setConfig] = useState<SiteConfig | null>(null);
 
   const handleLogin = (success: boolean) => {
     setIsLoggedIn(success);
@@ -33,8 +34,10 @@ export function AdminPanel() {
     <div className="admin-container">
       {!isLoggedIn ? (
         <LoginPanel onLogin={handleLogin} />
-      ) : (
+      ) : config ? (
         <AdminDashboard config={config} setConfig={setConfig} onLogout={() => setIsLoggedIn(false)} />
+      ) : (
+        <p>Cargando...</p>
       )}
     </div>
   );

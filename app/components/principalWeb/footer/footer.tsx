@@ -16,8 +16,8 @@ export function Footer({ footer, colors }: FooterProps) {
     <footer 
       className={styles.footer}
       style={{
-        backgroundColor: colors.footer_bg,
-        color: colors.navbar_text,
+        backgroundColor: colors.footer?.background || colors.footer?.footer_bg,
+        color: colors.navbar?.text || colors.navbar?.navbar_text,
       }}
     >
       <div className={styles.footerContainer}>

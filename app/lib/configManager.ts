@@ -10,15 +10,52 @@ export interface SubItem {
   url: string;
 }
 
+export interface FooterLink {
+  label: string;
+  url: string;
+}
+
 export interface Colors {
-  navbar_bg: string;
-  navbar_text: string;
-  content_bg: string;
-  footer_bg: string;
-  accent: string;
-  divider_color1: string;
-  divider_color2: string;
-  divider_color3: string;
+  navbar?: {
+    background?: string;
+    text?: string;
+    hover?: string;
+    navbar_bg?: string;
+    navbar_text?: string;
+  };
+  hero?: {
+    title?: string;
+    button_bg?: string;
+    button_text?: string;
+    button_hover?: string;
+  };
+  footer?: {
+    background?: string;
+    text?: string;
+    link_hover?: string;
+    footer_bg?: string;
+  };
+  dividers?: {
+    color1?: string;
+    color2?: string;
+    color3?: string;
+    divider_color1?: string;
+    divider_color2?: string;
+    divider_color3?: string;
+  };
+  sponsors?: {
+    item_bg?: string;
+    item_border?: string;
+    item_hover?: string;
+  };
+  content?: {
+    background?: string;
+    title?: string;
+    text?: string;
+    link?: string;
+    content_bg?: string;
+  };
+  accent?: string;
 }
 
 export interface Hero {
@@ -46,10 +83,10 @@ export interface ContentBlock {
 }
 
 export interface Fonts {
-  title_font: string;
-  body_font: string;
-  title_family: string;
-  body_family: string;
+  title_font?: string;
+  body_font?: string;
+  title_family?: string;
+  body_family?: string;
 }
 
 export interface SiteConfig {
@@ -67,6 +104,8 @@ export interface SiteConfig {
     channel: string;
     show_offline: boolean;
   };
+  colorFavorites?: string[];
+  colorHistory?: string[];
 }
 
 class ConfigManager {
@@ -84,7 +123,7 @@ class ConfigManager {
     try {
       const response = await fetch('/data/site-config.json');
       this.config = await response.json();
-      return this.config;
+      return this.config as SiteConfig;
     } catch (error) {
       console.error('Error cargando configuración:', error);
       throw error;

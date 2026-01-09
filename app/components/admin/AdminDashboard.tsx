@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SiteConfig } from '@/app/lib/configManager';
+import { SiteConfig, Colors, Sponsor, ContentBlock, FooterLink } from '@/app/lib/configManager';
 import { ColorUtils } from '@/app/lib/colorUtils';
 import { ColorPicker } from './ColorPicker';
 import { FileUploadField } from './FileUploadField';
@@ -208,17 +208,14 @@ function ColorsTab({ config, setConfig, onAddToHistory, onAddToFavorites }: Colo
   const updateColor = (section: string, key: string, value: string) => {
     if (!ColorUtils.isValidColor(value)) return;
 
-    const sectionKey = section as keyof typeof config.colors;
-    const sectionData = config.colors[sectionKey];
+    const sectionKey = section as keyof Colors;
     
-    if (!sectionData || typeof sectionData !== 'object') return;
-
     setConfig({
       ...config,
       colors: {
         ...config.colors,
         [sectionKey]: {
-          ...sectionData,
+          ...(config.colors?.[sectionKey] as any),
           [key]: value,
         },
       },
@@ -621,7 +618,7 @@ function FontsTab({ config, setConfig }: { config: SiteConfig; setConfig: (confi
   const updateFonts = (field: string, value: any) => {
     setConfig({
       ...config,
-      fonts: { ...config.fonts, [field]: value },
+      fonts: { ...(config.fonts || {}), [field]: value },
     });
   };
 
@@ -679,7 +676,7 @@ function FontsTab({ config, setConfig }: { config: SiteConfig; setConfig: (confi
 
 function ContentTab({ config, setConfig }: { config: SiteConfig; setConfig: (config: SiteConfig) => void }) {
   const addBlock = () => {
-    const newBlock: ContentBlockType = {
+    const newBlock: ContentBlock = {
       id: Date.now(),
       type: 'text_image',
       layout: 'image_left',
@@ -697,7 +694,7 @@ function ContentTab({ config, setConfig }: { config: SiteConfig; setConfig: (con
   const updateBlock = (id: number, field: string, value: any) => {
     setConfig({
       ...config,
-      content_blocks: config.content_blocks.map((b: ContentBlockType) =>
+      content_blocks: config.content_blocks.map((b: ContentBlock) =>
         b.id === id ? { ...b, [field]: value } : b
       ),
     });
@@ -706,7 +703,7 @@ function ContentTab({ config, setConfig }: { config: SiteConfig; setConfig: (con
   const deleteBlock = (id: number) => {
     setConfig({
       ...config,
-      content_blocks: config.content_blocks.filter((b: ContentBlockType) => b.id !== id),
+      content_blocks: config.content_blocks.filter((b: ContentBlock) => b.id !== id),
     });
   };
 
@@ -716,7 +713,7 @@ function ContentTab({ config, setConfig }: { config: SiteConfig; setConfig: (con
       <button onClick={addBlock} className="add-btn" style={{ marginBottom: '2rem' }}>+ Agregar Bloque</button>
 
       <div className="items-list">
-        {config.content_blocks.map((block: ContentBlockType) => (
+        {config.content_blocks.map((block: ContentBlock) => (
           <div key={block.id} className="item-card">
             <div className="item-content" style={{ flex: 1 }}>
               <div className="form-group">

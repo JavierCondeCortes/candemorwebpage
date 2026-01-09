@@ -23,10 +23,38 @@
     }
   ],
   "colors": {
-    "navbar_bg": "rgba(0, 0, 0, 0.7)",
-    "navbar_text": "#FFFFFF",
-    "content_bg": "#FFFFFF",
-    "footer_bg": "rgba(0, 0, 0, 0.5)",
+    "navbar": {
+      "background": "rgba(0, 0, 0, 0.7)",
+      "text": "#FFFFFF",
+      "hover": "rgba(255, 255, 255, 0.1)"
+    },
+    "hero": {
+      "title": "#FFFFFF",
+      "button_bg": "#FFFFFF",
+      "button_text": "#5865F2",
+      "button_hover": "#F0F0F0"
+    },
+    "footer": {
+      "background": "rgba(0, 0, 0, 0.5)",
+      "text": "#FFFFFF",
+      "link_hover": "#9D4EDD"
+    },
+    "dividers": {
+      "color1": "#9D4EDD",
+      "color2": "#000000",
+      "color3": "#FFD60A"
+    },
+    "sponsors": {
+      "item_bg": "#f0f0f0",
+      "item_border": "#ddd",
+      "item_hover": "#e0e0e0"
+    },
+    "content": {
+      "background": "#FFFFFF",
+      "title": "#333",
+      "text": "#555",
+      "link": "#9D4EDD"
+    },
     "accent": "#9D4EDD"
   },
   "hero": {

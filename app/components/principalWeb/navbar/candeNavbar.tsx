@@ -36,8 +36,8 @@ export function CandeNavbar({ navigation, colors }: CandeNavbarProps) {
       <nav 
         className={styles.navbar}
         style={{
-          backgroundColor: colors.navbar_bg,
-          color: colors.navbar_text,
+          backgroundColor: colors.navbar?.background || colors.navbar?.navbar_bg,
+          color: colors.navbar?.text || colors.navbar?.navbar_text,
         }}
       >
         <div className={styles.navbarContainer}>
@@ -110,7 +110,7 @@ export function CandeNavbar({ navigation, colors }: CandeNavbarProps) {
             key={`dropdown-${item.id}`}
             className={`${styles.desktopDropdown} ${hoverDropdown === item.id ? styles.show : ''}`}
             style={{
-              backgroundColor: colors.navbar_text,
+              backgroundColor: colors.navbar?.text || colors.navbar?.navbar_text,
               color: '#000',
             }}
             onMouseEnter={() => setHoverDropdown(item.id)}
@@ -140,8 +140,8 @@ export function CandeNavbar({ navigation, colors }: CandeNavbarProps) {
         <div 
           className={styles.navDropdown}
           style={{
-            backgroundColor: colors.navbar_bg,
-            color: colors.navbar_text,
+            backgroundColor: colors.navbar?.background || colors.navbar?.navbar_bg,
+            color: colors.navbar?.text || colors.navbar?.navbar_text,
           }}
         >
           {navigation.map((item) => (
